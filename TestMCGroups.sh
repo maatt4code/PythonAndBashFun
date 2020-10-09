@@ -8,6 +8,7 @@
 
 # Get arguement list
 # use 'shift' if you want to skip a few
+# using (...) turns it into a list
 GROUPS=("$@")
 
 INTF_PREFIX='intf'
