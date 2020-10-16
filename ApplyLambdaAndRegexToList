@@ -1,0 +1,42 @@
+#!/bin/python
+
+# regex
+import re
+
+
+# Given a list
+# - extract info of interest from each element
+# - return sorted list of such info
+def get_unique_from_list(list_to_process):
+    # lambda for performing regex replace on list
+    # given re match (m)
+    replace_fn = lambda m : m.group(1)
+
+    # extract info of interest from each element in list
+    # - In this example, simply extract anything in between _ and _
+    # - use replace_fn as arg to re.sub
+    info_of_interest = [re.sub(r"^.*_([^_]+)_.*$", replace_fn, i) for i in list_to_process]
+
+    # make unique
+    info_of_interest = set(info_of_interest)
+
+    # convert into sorted list
+    info_of_interest = list(info_of_interest)
+    info_of_interest.sort()
+
+    # we are done
+    return info_of_interest
+
+
+def main():
+    list_to_process = [
+                '111_aaa_moo.txt', '111_bbb_moo.txt', '111_ccc_moo.txt', '111_ddd_moo.txt',
+                '222_aaa_moo.txt', '222_bbb_moo.txt', '222_ccc_moo.txt', '222_ddd_moo.txt']
+
+    info_of_interest = get_unique_from_list(list_to_process)
+
+    print(info_of_interest)
+
+
+if __name__ == "__main__":
+    main()
