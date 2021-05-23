@@ -5,6 +5,14 @@ def now() -> datetime:
     return datetime.utcnow()
 
 
+def timestamp_to_microsec(ts: str, fmt: str = "%Y-%m-%d %H:%M:%S.%f") -> int:
+    epoch = datetime.utcfromtimestamp(0)
+    now = datetime.strptime(ts, fmt)
+    delta = (now - epoch).total_seconds()
+    delta *= 1000000
+    return int(delta)
+
+
 def info(msg):
     print("[%s] INFO : %s" % (now(), msg))
 
